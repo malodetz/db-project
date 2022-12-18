@@ -111,14 +111,11 @@ CREATE TABLE movie_database.review
 (
     movie_id        INTEGER   NOT NULL,
     user_id         INTEGER   NOT NULL,
-    start_date TIMESTAMP NOT NULL,
     review_date     TIMESTAMP NOT NULL,
     score           INTEGER   NOT NULL,
     comment         TEXT,
 
-    CONSTRAINT PK_review PRIMARY KEY (movie_id, user_id, start_date),
+    CONSTRAINT PK_review PRIMARY KEY (movie_id, user_id),
     CONSTRAINT movie_id_constraint FOREIGN KEY (movie_id) REFERENCES movie_database.movie (movie_id),
-    CONSTRAINT user_constraint FOREIGN KEY (user_id, start_date) REFERENCES movie_database.user (user_id, start_date),
-    CONSTRAINT score_constraint CHECK (0 <= score AND score <= 10),
-    CONSTRAINT review_date_constraint CHECK (review_date >= start_date)
+    CONSTRAINT score_constraint CHECK (0 <= score AND score <= 10)
 );
